@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EggCelent Managerial Platform</title>
+    
+    <style>
+        /* MINIMALIST STYLING */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background-color: #ffffff;
+            color: #222222;
+            margin: 0;
+            padding: 40px 20px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Clean Headers and Text */
+        h1 {
+            font-weight: 300;
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #111111;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Minimalist Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 12px 8px;
+            text-align: left;
+            border-bottom: 1px solid #eeeeee;
+        }
+
+        th {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #888888;
+            font-weight: 500;
+        }
+
+        /* Clean Inputs */
+        input[type="text"], 
+        input[type="number"], 
+        input[type="date"] {
+            width: 90%;
+            padding: 8px 4px;
+            border: none;
+            border-bottom: 1px solid #dddddd;
+            background: transparent;
+            font-family: inherit;
+            font-size: 14px;
+            color: #111111;
+            transition: border-bottom 0.2s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-bottom: 1px solid #111111;
+        }
+
+        /* Outlined Buttons */
+        button {
+            background: transparent;
+            border: 1px solid #111111;
+            color: #111111;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-right: 10px;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            background: #111111;
+            color: #ffffff;
+        }
+
+        /* Special Excel Button */
+        #exportBtn {
+            border-color: #217346;
+            color: #217346;
+        }
+
+        #exportBtn:hover {
+            background: #217346;
+            color: #ffffff;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eeeeee;
+            font-size: 12px;
+            color: #999999;
+            text-align: center;
+        }
+        
+        .button-group {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Egg Management</h1>
+    <p> Welcome to the Egg Management platform. 
+        
+    This is a simple HTML page for the Egg HTMK project. This will be used to manage the egg operation of multiple users.<br>
+    Insert your data into the following tables for arrangement, and it will do the necessary calculations for you.</p>
+
+    <!-- Grouped the action buttons cleanly above or below the table -->
+    <div class="button-group">
+        <button type="button" onclick="addRow();">Add Date Row</button>
+        <button type="button" onclick="calculatePercentage()">Calculate Percentages</button>
+        <button>Save Progress</button>
+        <button id="exportBtn">📥 Export to Excel</button>
+    </div>
+
+    <table> 
+        <tr>
+            <th>Date</th>
+            <th>Eggs collected</th>
+            <th>NO of chickens</th>
+            <th>Feeds used (per day)</th>
+            <th>Breakage</th> 
+            <th>Percentage</th>
+            <th>Owners Remarks</th>
+        </tr>
+        <tr>
+            <td><input type="date" name="date1"></td>
+            <td><input type="number" name="quantity1"></td>
+            <td><input type="number" name="quantity2"></td>
+            <td><input type="text" name="batchName1"></td>
+            <td><input type="text" name="batchName1"></td>
+            <td><input type="text" name="batchName1"></td>
+            <td><input type="text" name="batchName1"></td>
+        </tr>
+        <tr>
+            <td><input type="date" name="date2"></td>
+            <td><input type="number" name="quantity2"></td>
+            <td><input type="number" name="quantity3"></td>
+            <td><input type="text" name="batchName2"></td>
+            <td><input type="text" name="batchName2"></td>
+            <td><input type="text" name="batchName1"></td>
+            <td><input type="text" name="batchName1"></td>
+        </tr>
+        <tr>
+            <td><input type="date" name="date3"></td>
+            <td><input type="number" name="quantity3"></td>
+            <td><input type="number" name="quantity4"></td>
+            <td><input type="text" name="batchName3"></td>
+            <td><input type="text" name="batchName3"></td>
+            <td><input type="text" name="batchName1"></td>
+            <td><input type="text" name="batchName1"></td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        <p>Copyright © 2026 Eggcelent productions. All rights reserved.</p>
+    </div>
+
+    <!-- SCRIPTS PLACED AT THE BOTTOM SO THEY DON'T BLOCK THE PAGE LOADING -->
+    <script>
+        // Your exact addRow logic, just expanded to loop 7 times to match your 7 headers
+        function addRow() {
+            var table = document.querySelector("table");
+            var newRow = table.insertRow();
+            for (var i = 0; i < 7; i++) {
+                var cell = newRow.insertCell();
+                if (i === 0) {
+                    cell.innerHTML = '<input type="date" name="date">';
+                } else if (i === 1) {
+                    cell.innerHTML = '<input type="number" name="quantity">';
+                } else if (i === 2) {
+                    cell.innerHTML = '<input type="number" name="chickens">'; // Switched to number for the math to work
+                } else if (i === 3) {
+                    cell.innerHTML = '<input type="text" name="batchName">';
+                } else if (i === 4) {
+                    cell.innerHTML = '<input type="text" name="batchName">';
+                } else if (i === 5) {
+                    cell.innerHTML = '<input type="text" name="batchName">';
+                } else if (i === 6) {
+                    cell.innerHTML = '<input type="text" name="batchName">';
+                }
+            }
+        }
+
+        // Your exact calculation logic
+        function calculatePercentage() {
+            var table = document.querySelector("table");
+            var rows = table.querySelectorAll("tr");
+            for (var i = 1; i < rows.length; i++) {
+                var cells = rows[i].querySelectorAll("td");
+                
+                var eggsCollected = parseFloat(cells[1].querySelector("input").value) || 0;
+                var numberOfChickens = parseFloat(cells[2].querySelector("input").value) || 0;
+                
+                var percentage = numberOfChickens !== 0 ? (eggsCollected / numberOfChickens) * 100 : 0;
+                
+                if (cells[5] && cells[5].querySelector("input")) {
+                    cells[5].querySelector("input").value = percentage.toFixed(1) + "%";
+                }
+            }
+        }
+    </script>
+
+</body>
+</html>
